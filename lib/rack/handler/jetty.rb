@@ -13,7 +13,7 @@ class Rack::Handler::Jetty < Rack::Handler::Servlet
 
   def self.run(app, options)
 
-    unless options.fetch(:without_logger, false)
+    if options.fetch(:replace_jetty_logger, true)
       # We want to set the logger ASAP to get rid of stderr logging that comes out
       @logger = Rack::Handler::JettyLogAdapter.new(options[:logger], options[:log_prefix] ||
                                'JETTY: ')
