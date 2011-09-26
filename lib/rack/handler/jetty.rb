@@ -1,6 +1,7 @@
 require 'jetty.jar'
 require 'jetty-plus.jar'
 require 'jetty-util.jar'
+require 'jetty-jmx.jar'
 require 'servlet-api.jar'
 require 'rack'
 require 'jruby-rack'
@@ -21,6 +22,13 @@ class Rack::Handler::Jetty < Rack::Handler::Servlet
     end
 
     jetty = org.mortbay.jetty.Server.new options[:Port]
+
+    if options.fetch(:with_jmx, true)
+      m_bean_server = java.lang.management.ManagementFactory.getPlatformMBeanServer
+      container = org.mortbay.management.MBeanContainer.new(m_bean_server)
+      jetty.container.add_event_listener(container)
+      container.start
+    end
 
     max_threads = options[:max_threads] || DEFAULT_MAX_THREADS
     thread_pool = org.mortbay.thread.QueuedThreadPool.new(max_threads)
