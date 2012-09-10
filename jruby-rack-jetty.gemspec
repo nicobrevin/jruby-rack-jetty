@@ -4,7 +4,7 @@ $:.unshift lib unless $:.include?(lib)
 
 spec = Gem::Specification.new do |s|
   s.name   = "jruby-rack-jetty"
-  s.version = '0.1.1'
+  s.version = '0.2.0'
   s.platform = Gem::Platform::RUBY
   s.summary = "Jetty support for jruby-rack"
   s.description = 'A basic adapter that lets you run rack applications with jetty under JRuby'
