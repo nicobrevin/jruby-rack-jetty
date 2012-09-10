@@ -1,7 +1,7 @@
 require 'jetty.jar'
 require 'jetty-plus.jar'
 require 'jetty-util.jar'
-require 'jetty-jmx.jar'
+require 'jetty-management.jar'
 require 'servlet-api.jar'
 require 'rack'
 require 'jruby-rack'
